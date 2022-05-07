@@ -5,7 +5,7 @@ from datetime import datetime
 
 from typing import List
 
-import DHT_lib
+# import DHT_lib
 import board
 from adafruit_bme280 import basic as adafruit_bme280
 
@@ -33,16 +33,16 @@ height FLOAT(4)\
     return
 
 
-dht = DHT_lib.DHT(11)
-
-
-def get_simple_measurements():
-    chk = dht.read_DHT11()
-    # if chk is 0:
-    #     print('ok')
-    # print("chk : %d, \t Humidity : %.2f, \t Temperature : %.2f " % (chk, dht.humidity, dht.temperature))
-
-    return [chk, dht.humidity, dht.temperature]
+# dht = DHT_lib.DHT(11)
+#
+#
+# def get_simple_measurements():
+#     chk = dht.read_DHT11()
+#     # if chk is 0:
+#     #     print('ok')
+#     # print("chk : %d, \t Humidity : %.2f, \t Temperature : %.2f " % (chk, dht.humidity, dht.temperature))
+#
+#     return [chk, dht.humidity, dht.temperature]
 
 
 i2c = board.I2C()  # uses board.SCL and board.SDA
@@ -55,9 +55,9 @@ def get_extended_measurements():
 
 
 def get_measurements():
-    simple_measurements = get_simple_measurements()
+    # simple_measurements = get_simple_measurements()
     extended_measurements = get_extended_measurements()
-    return simple_measurements + extended_measurements
+    return [0, 0., 0.] + extended_measurements
 
 
 def insert_measures():
