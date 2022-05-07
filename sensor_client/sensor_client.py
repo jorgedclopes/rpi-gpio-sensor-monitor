@@ -2,16 +2,19 @@ import time
 import schedule
 import mysql.connector
 from datetime import datetime
+
+from typing import List
+
 import DHT_lib
 import board
 from adafruit_bme280 import basic as adafruit_bme280
 
 
 def setup_db():
-    with mysql.connector.connect(host='localhost',
+    with mysql.connector.connect(host='mysql',
                                  port=3306,
-                                 user='root',
-                                 password='rootpass',
+                                 user='user',
+                                 password='userpass',
                                  database='sensor') as cnx:
         cur = cnx.cursor(prepared=True)
         table_ddl = 'CREATE TABLE IF NOT EXISTS raw_data (\
@@ -71,7 +74,7 @@ def insert_measures():
     values(%s, %s, %s, %s, %s, %s, %s);"
 
         date_time = datetime.now()
-        measures: list[object] = get_measurements()
+        measures: List[object] = get_measurements()
         params = [date_time] + measures
         cur.execute(insert_query, params)
 

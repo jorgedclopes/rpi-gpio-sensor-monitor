@@ -1,0 +1,39 @@
+version: '3.7'
+
+volumes:
+    mysql_data: {}
+    grafana_data: {}
+
+services:
+  # simple myself setup
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    user: "0"
+    ports:
+      - 3306:3306
+    volumes:
+      - ~/.mysql-config-config/conf.d:/etc/mysql-config/conf.d
+      - ~/.mysql-storage/:/var/lib/mysql-config/
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: sensor
+      MYSQL_USER: user
+      MYSQL_PASSWORD: userpass
+    restart: always
+
+  # grafana used for graphing mysql-config data
+  grafana:
+    image: grafana/grafana:8.4.3
+    container_name: grafana
+    user: "0"
+    depends_on:
+      - mysql
+    ports:
+      - 3000:3000
+    volumes:
+      - ~/.grafana_data:/var/lib/grafana
+      - ~/.grafana/provisioning/:/etc/grafana/provisioning/
+    env_file:
+      - ~/.grafana/config.monitoring
+    restart: always
