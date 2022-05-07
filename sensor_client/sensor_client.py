@@ -11,7 +11,7 @@ from adafruit_bme280 import basic as adafruit_bme280
 
 
 def setup_db():
-    with mysql.connector.connect(host='mysql',
+    with mysql.connector.connect(host='localhost',
                                  port=3306,
                                  user='user',
                                  password='userpass',
