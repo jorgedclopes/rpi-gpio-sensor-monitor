@@ -69,8 +69,9 @@ def insert_measures():
                                  user='root',
                                  password='rootpass',
                                  database='sensor') as cnx:
+        lock = cnx.cursor()
+        lock.execute("LOCK TABLE raw_data WRITE;")
         cur = cnx.cursor(prepared=True)
-        cur.execute('LOCK TABLE raw_data WRITE;')
 
         insert_query = "INSERT INTO raw_data \
     (time, simple_check, temperature_simple, humidity_simple, temperature, humidity, pressure, height) \
@@ -86,9 +87,8 @@ def insert_measures():
         # for el in cur:
         #     print(el)
 
-        cur.execute('UNLOCK TABLES;')
         cnx.commit()
-
+        lock.execute('UNLOCK TABLES;')
     return
 
 
