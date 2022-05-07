@@ -52,6 +52,7 @@ def get_extended_measurements():
         bme280.sea_level_pressure = 1022.
         return [bme280.temperature, bme280.humidity, bme280.pressure, bme280.altitude]
     except ValueError:
+        print("WARNING: Failed to measuring Adafruit.")
         return [-999., -1., -1., -999]
 
 
