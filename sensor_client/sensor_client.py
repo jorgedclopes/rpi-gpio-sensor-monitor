@@ -72,7 +72,7 @@ def insert_measures():
 
         insert_query = "INSERT INTO raw_data \
     (time, simple_check, temperature_simple, humidity_simple, temperature, humidity, pressure, height) \
-    values(%s, %s, %s, %s, %s, %s, %s);"
+    values(%s, %s, %s, %s, %s, %s, %s, %s);"
 
         date_time = datetime.now()
         measures: List[object] = get_measurements()
