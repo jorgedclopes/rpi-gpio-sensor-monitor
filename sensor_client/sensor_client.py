@@ -18,7 +18,7 @@ def setup_db():
                                  database='sensor') as cnx:
         cur = cnx.cursor(prepared=True)
         table_ddl = 'CREATE TABLE IF NOT EXISTS raw_data (\
-time TIMESTAMP(6) NOT NULL UNIQUE, \
+time TIMESTAMP NOT NULL UNIQUE, \
 simple_check SMALLINT, \
 temperature_simple FLOAT(4), \
 humidity_simple FLOAT(4), \
