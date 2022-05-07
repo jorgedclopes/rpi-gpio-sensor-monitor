@@ -45,13 +45,14 @@ height FLOAT(4)\
 #     return [chk, dht.humidity, dht.temperature]
 
 
-i2c = board.I2C()  # uses board.SCL and board.SDA
-bme280 = adafruit_bme280.Adafruit_BME280_I2C(i2c)
-bme280.sea_level_pressure = 1022.
-
-
 def get_extended_measurements():
-    return [bme280.temperature, bme280.humidity, bme280.pressure, bme280.altitude]
+    try:
+        i2c = board.I2C()  # uses board.SCL and board.SDA
+        bme280 = adafruit_bme280.Adafruit_BME280_I2C(i2c)
+        bme280.sea_level_pressure = 1022.
+        return [bme280.temperature, bme280.humidity, bme280.pressure, bme280.altitude]
+    except ValueError:
+        return [-999., -1., -1., -999]
 
 
 def get_measurements():
