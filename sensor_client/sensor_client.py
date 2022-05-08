@@ -63,14 +63,11 @@ def get_measurements():
 
 
 def insert_measures():
-    print('Starting local_connect()')
     with mysql.connector.connect(host='localhost',
                                  port=3306,
                                  user='root',
                                  password='rootpass',
                                  database='sensor') as cnx:
-        lock = cnx.cursor()
-        lock.execute("LOCK TABLE raw_data WRITE;")
         cur = cnx.cursor(prepared=True)
 
         insert_query = "INSERT INTO raw_data \
@@ -80,6 +77,8 @@ def insert_measures():
         date_time = datetime.now()
         measures: List[object] = get_measurements()
         params = [date_time] + measures
+
+        print('Sending data to DB.')
         cur.execute(insert_query, params)
 
         # query = 'SELECT * FROM raw_data;'
@@ -88,7 +87,7 @@ def insert_measures():
         #     print(el)
 
         cnx.commit()
-        lock.execute('UNLOCK TABLES;')
+        print('Data to DB sent.')
     return
 
 
