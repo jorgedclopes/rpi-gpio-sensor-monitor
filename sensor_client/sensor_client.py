@@ -17,7 +17,7 @@ def setup_db():
                                  password='userpass',
                                  database='sensor') as cnx:
         cur = cnx.cursor(prepared=True)
-        table_ddl = 'CREATE TABLE IF NOT EXISTS raw_data (\
+        table_ddl = 'CREATE TABLE IF NOT EXISTS rawData (\
 time TIMESTAMP NOT NULL UNIQUE, \
 simple_check SMALLINT, \
 temperature_simple FLOAT(4), \
@@ -70,7 +70,7 @@ def insert_measures():
                                  database='sensor') as cnx:
         cur = cnx.cursor(prepared=True)
 
-        insert_query = "INSERT INTO raw_data \
+        insert_query = "INSERT INTO rawData \
     (time, simple_check, temperature_simple, humidity_simple, temperature, humidity, pressure, height) \
     values(%s, %s, %s, %s, %s, %s, %s, %s);"
 
