@@ -28,6 +28,8 @@ pressure FLOAT(4), \
 height FLOAT(4)\
 );'
         cur.execute(table_ddl)
+        timezone_query = "SET GLOBAL time_zone = '-1:00';"  # This is my timezone, feel free to change it
+        cur.execute(timezone_query)
         cnx.commit()
 
     return
