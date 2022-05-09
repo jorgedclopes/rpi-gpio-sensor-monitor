@@ -1,5 +1,6 @@
 import time
 import schedule
+import pytz
 import mysql.connector
 from datetime import datetime
 
@@ -76,7 +77,8 @@ def insert_measures():
     (time, simple_check, temperature_simple, humidity_simple, temperature, humidity, pressure, height) \
     values(%s, %s, %s, %s, %s, %s, %s, %s);"
 
-        date_time = datetime.now()
+        tz = pytz.timezone('Europe/London')
+        date_time = datetime.now().astimezone(tz)
         measures: List[object] = get_measurements()
         params = [date_time] + measures
 
