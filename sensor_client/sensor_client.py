@@ -76,7 +76,7 @@ def insert_measures():
     (time, simple_check, temperature_simple, humidity_simple, temperature, humidity, pressure, height) \
     values(%s, %s, %s, %s, %s, %s, %s, %s);"
 
-        date_time = datetime.now().astimezone()
+        date_time = datetime.utcnow()
         measures: List[object] = get_measurements()
         params = [date_time] + measures
 
