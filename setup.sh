@@ -12,5 +12,5 @@ rm -rf ~/.grafana
 cp -rf grafana ~/.grafana
 
 VERSION=$(python setup.py --version)
-docker build . --file Dockerfile --tag carequinha/mysql_client:${{ VERSION }}
+docker build . --file Dockerfile --tag carequinha/mysql_client:$VERSION
 docker-compose up -d
