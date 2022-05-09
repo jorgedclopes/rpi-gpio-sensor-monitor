@@ -1,6 +1,5 @@
 import time
 import schedule
-import pytz
 import mysql.connector
 from datetime import datetime
 
