@@ -20,9 +20,7 @@ datasources:
   # <string> url
   url: mysql:3306
   # <string> database user, if used
-  user: user
-  # <string> database password, if used
-  password: userpass
+  user: root
   # <string> database name, if used
   database: sensor
   # <bool> enable/disable basic auth
@@ -42,6 +40,8 @@ datasources:
      tlsAuthWithCACert: false
   # <string> json object of data that will be encrypted.
   secureJsonData:
+    # <string> database password, if used
+    password: rootpass
     tlsCACert: "..."
     tlsClientCert: "..."
     tlsClientKey: "..."
