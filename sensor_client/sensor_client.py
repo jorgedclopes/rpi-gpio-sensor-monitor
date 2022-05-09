@@ -77,8 +77,7 @@ def insert_measures():
     (time, simple_check, temperature_simple, humidity_simple, temperature, humidity, pressure, height) \
     values(%s, %s, %s, %s, %s, %s, %s, %s);"
 
-        tz = pytz.timezone('Europe/London')
-        date_time = datetime.now().astimezone(tz)
+        date_time = datetime.now().astimezone(time.tzname[time.daylight])
         measures: List[object] = get_measurements()
         params = [date_time] + measures
 
