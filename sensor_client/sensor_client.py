@@ -76,9 +76,11 @@ def insert_measures():
     (time, simple_check, temperature_simple, humidity_simple, temperature, humidity, pressure, height) \
     values(%s, %s, %s, %s, %s, %s, %s, %s);"
 
-        date_time = datetime.now().astimezone()
+        date_time = datetime.utcnow()
+        print(date_time)
         measures: List[object] = get_measurements()
         params = [date_time] + measures
+        print("Params: ", params)
 
         print('Sending data to DB.')
         cur.execute(insert_query, params)
